@@ -1,4 +1,4 @@
-package com.neo.SpringAPI;
+package com.neo.SpringAPI.Entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

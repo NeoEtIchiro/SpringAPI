@@ -1,4 +1,4 @@
-package com.neo.SpringAPI;
+package com.neo.SpringAPI.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.neo.SpringAPI.Entities.User;
+import com.neo.SpringAPI.Repositories.UserRepository;
 
 @Controller
 @RequestMapping(path="/users")

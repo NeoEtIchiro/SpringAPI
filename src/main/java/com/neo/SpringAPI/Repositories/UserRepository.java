@@ -1,8 +1,8 @@
-package com.neo.SpringAPI;
+package com.neo.SpringAPI.Repositories;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.neo.SpringAPI.User;
+import com.neo.SpringAPI.Entities.User;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete
