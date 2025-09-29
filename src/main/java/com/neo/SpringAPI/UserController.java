@@ -19,10 +19,15 @@ public class UserController {
   private UserRepository userRepository;
 
   @PostMapping(path="/add")
-  public @ResponseBody String addNewUser (@RequestParam String name
-      , @RequestParam String email, @RequestParam String password, @RequestParam String role) {
-    // @ResponseBody means the returned String is the response, not a view name
-    // @RequestParam means it is a parameter from the GET or POST request
+  public @ResponseBody String addNewUser (
+    @RequestParam(name = "name", required = true) String name, 
+    @RequestParam(name = "email", required = true) String email, 
+    @RequestParam(name = "password", required = true) String password, 
+    @RequestParam(name = "role", required = true) String role) {
+
+    if (!role.equalsIgnoreCase("moderator") && !role.equalsIgnoreCase("publisher")) {
+      return "Error: role must be 'moderator' or 'publisher'";
+    }
 
     User n = new User();
     n.setName(name);
@@ -39,13 +44,20 @@ public class UserController {
     return userRepository.findAll();
   }
 
+  @GetMapping(path="/get")
+  public @ResponseBody User getUserById(
+    @RequestParam(name = "id", required = true) Integer id) {
+
+    return userRepository.findById(id).orElse(null);
+  }
+
   @PutMapping(path="/update") 
   public @ResponseBody String updateUser(
-      @RequestParam(name = "id") Integer id,
-      @RequestParam(name = "name") String name,
-      @RequestParam(name = "email") String email,
-      @RequestParam(name = "password") String password,
-      @RequestParam(name = "role") String role) {
+      @RequestParam(name = "id", required = true) Integer id,
+      @RequestParam(name = "name", required = true) String name,
+      @RequestParam(name = "email", required = true) String email,
+      @RequestParam(name = "password", required = true) String password,
+      @RequestParam(name = "role", required = true) String role) {
 
     User n = userRepository.findById(id).orElse(null);
     if (n == null) {
@@ -60,7 +72,9 @@ public class UserController {
   }
 
   @DeleteMapping(path="/delete")
-  public @ResponseBody String deleteUser(@RequestParam(name = "id", required = true) Integer id) {
+  public @ResponseBody String deleteUser(
+    @RequestParam(name = "id", required = true) Integer id) {
+      
     User n = userRepository.findById(id).orElse(null);
     if (n == null) {
       return "User not found";
