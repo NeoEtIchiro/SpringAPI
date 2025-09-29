@@ -17,7 +17,7 @@ public class Article {
 
   private String content;
 
-  private String authorId;
+  private Integer authorId;
 
   public Integer getId() {
     return id;
@@ -43,11 +43,11 @@ public class Article {
     this.content = content;
   }
 
-  public String getAuthorId() {
+  public Integer getAuthorId() {
     return authorId;
   }
 
-  public void setAuthorId(String authorId) {
+  public void setAuthorId(Integer authorId) {
     this.authorId = authorId;
   }
 }

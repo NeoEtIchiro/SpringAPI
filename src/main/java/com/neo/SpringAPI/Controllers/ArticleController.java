@@ -14,18 +14,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.neo.SpringAPI.Entities.Article;
 import com.neo.SpringAPI.Repositories.ArticleRepository;
+import com.neo.SpringAPI.Repositories.UserRepository;
 
 @Controller
 @RequestMapping(path="/articles")
 public class ArticleController {
   @Autowired
   private ArticleRepository articleRepository;
+  @Autowired
+  private UserRepository userRepository;
 
   @PostMapping(path="/add")
   public @ResponseBody String addNewArticle (
     @RequestParam(name = "content", required = true) String content, 
-    @RequestParam(name = "authorId", required = true) String authorId) {
+    @RequestParam(name = "authorId", required = true) Integer authorId) {
 
+    if(userRepository.findById(authorId).orElse(null) == null) {
+      return "Error: authorId does not correspond to a user";
+    }
+    
     Article n = new Article();
     n.setDate(java.time.LocalDateTime.now());
     n.setContent(content);
