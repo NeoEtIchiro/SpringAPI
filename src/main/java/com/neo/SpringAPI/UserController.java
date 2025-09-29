@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,5 +57,15 @@ public class UserController {
     n.setRole(role);
     userRepository.save(n);
     return "Updated";
+  }
+
+  @DeleteMapping(path="/delete")
+  public @ResponseBody String deleteUser(@RequestParam(name = "id", required = true) Integer id) {
+    User n = userRepository.findById(id).orElse(null);
+    if (n == null) {
+      return "User not found";
+    }
+    userRepository.delete(n);
+    return "Deleted";
   }
 }
