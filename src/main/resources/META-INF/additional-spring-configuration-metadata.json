@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "springapi.app.jwtSecret",
+      "type": "java.lang.String",
+      "description": "Secret key for JWT signing."
+    },
+    {
+      "name": "springapi.app.jwtExpirationMs",
+      "type": "java.lang.Integer",
+      "description": "JWT expiration in milliseconds."
+    }
+  ]
+}
